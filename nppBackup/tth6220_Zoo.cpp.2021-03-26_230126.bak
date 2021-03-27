@@ -1,0 +1,123 @@
+#include "tth6220_Zoo.h"
+
+using namespace std;
+
+Zoo::Zoo()
+{
+	name = "Dallas Zoo";
+}
+
+Zoo::Zoo(string n)
+{
+	name = n;
+}
+
+string Zoo::get_name()
+{
+	return name;
+}
+
+void Zoo::set_name(string n)
+{
+	name = n;
+}
+
+void Zoo::add_animal(Animal animal)
+{
+	cout << "Adding new animal..." << endl;
+	bool check = true;
+	for(int i=0; i<list_animal.size(); i++)
+	{
+		if(animal.get_id() == list_animal.at(i).get_id())
+		{
+			check = false;
+			break;
+		}
+	}
+	if(check)
+	{
+		list_animal.push_back(animal);
+		cout << "Added!\n" << endl;
+	}
+	else
+	{
+		cout << "ID duplicate not allowed! Cannot add this animal.\n" << endl;
+	}
+}
+
+void Zoo::remove_animal(int id)
+{
+	int i;
+	for(i=0; i<list_animal.size(); i++)
+	{
+		if((list_animal.at(i)).get_id() == id)
+		{
+			cout << "\nRemoving " << (list_animal.at(i)).get_name() << " out of the zoo.\n" << endl;
+			list_animal.erase(list_animal.begin()+i);
+			break;
+		}
+	}
+}
+
+string Zoo::to_string()
+{
+	string temp;
+	string zoo_info = name + "\n\n";
+	for(int i=0; i<list_animal.size(); i++)
+	{
+		temp = list_animal.at(i).to_string();
+		//temp = std::to_string(i+1) + ". Name:" + (list_animal.at(i)).get_name() + "\n";
+		zoo_info = zoo_info + temp;
+	}
+	return zoo_info;
+}
+
+ostream& operator<<(ostream& ost, const Zoo& zoo)
+{
+	string temp;
+	for(int i=0; i<(zoo.list_animal).size(); i++)
+	{
+		temp = temp  + "Name:" + (zoo.list_animal).at(i).get_name() + "\nID:" + std::to_string((zoo.list_animal).at(i).get_id()) + "\nSpecies: " + (zoo.list_animal).at(i).get_species() + "\nSound: " + (zoo.list_animal).at(i).get_sound() + "\n\n" ;
+	
+	}
+	ost << zoo.name << "\n\n" << temp << endl;
+	return ost;
+}
+
+
+Animal Zoo::view_animal(int id)
+{
+	int i;
+	for(i=0; i<list_animal.size(); i++)
+	{
+		if((list_animal.at(i)).get_id() == id)
+		{
+			cout << "Animal with id " << id << ": " << list_animal.at(i);
+			return list_animal.at(i);
+		}
+	}	
+}
+
+string Zoo::listen_to_sound(int id)
+{
+	int i;
+	for(i=0; i<list_animal.size(); i++)
+	{
+		if((list_animal.at(i)).get_id() == id)
+		{
+			return (list_animal.at(i)).get_sound();
+			break;
+		}
+	}	
+}
+
+string Zoo::list_of_animals()
+{
+	string temp;
+	for(int i=0; i<list_animal.size(); i++)
+	{
+		temp = temp + "Name:" + list_animal.at(i).get_name() + "\nID:" + std::to_string(list_animal.at(i).get_id()) + "\n";
+	
+	}
+	return temp;
+}

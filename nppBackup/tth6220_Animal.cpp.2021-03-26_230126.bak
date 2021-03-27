@@ -1,0 +1,65 @@
+#include "tth6220_Animal.h"
+
+using namespace std;
+
+Animal::Animal()
+{
+	name = "Elephant";
+	id = 1111;
+	species = "Loxodomya africana";
+	sound = "\"Pawoo\"";
+}
+
+Animal::Animal(string n, int i, string sp, string so)
+{
+	name = n;
+	id = i;
+	species = sp;
+	sound = so;
+}
+
+string Animal::get_name() const
+{
+	return name;
+}
+
+int Animal::get_id() const
+{
+	return id;
+}
+
+string Animal::get_species() const
+{
+	return species;
+}
+
+string Animal::get_sound() const
+{
+	return sound;
+}
+
+void Animal::set_name(string n)
+{
+	name = n;
+}
+void Animal::set_id(int i)
+{
+	id = i;
+}
+void Animal::set_species(string sp)
+{
+	species = sp;
+}
+void Animal::set_sound(string so)
+{
+	sound = so;
+}
+string Animal::to_string() const
+{
+	string temp = "Name: " + name + "\n" + "ID: " + std::to_string(id) + "\nSpecies: " + species + "\nSound: " + sound + "\n";
+	return temp;
+}
+ostream& operator<< (ostream& ost, const Animal& animal)
+{
+	ost << "Name: " << animal.name << "\n" << "ID: " << animal.id << "\n" << "Species: " << animal.species << "\n" << "Sound: " << animal.sound << endl;
+}
